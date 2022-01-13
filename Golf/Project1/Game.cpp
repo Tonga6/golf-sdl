@@ -1,4 +1,8 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "GameObject.h"
+
+GameObject* ball;
 Game::Game() {
 
 }
@@ -21,8 +25,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height) {
 			std::cout << "Error creating renderer" << std::endl;
 			return;
 		}
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 		isRunning = true;
+
+		ball = new GameObject("D:/GameDev/golf-sdl/Golf/Project1/Assets/1x/ball.png", renderer);
 	}
 };
 
@@ -39,10 +45,13 @@ void Game::handleEvents() {
 	}
 };
 
-void Game::update() {};
+void Game::update() {
+	ball->Update();
+};
 
 void Game::render() {
 	SDL_RenderClear(renderer);
+	ball->Render();
 	SDL_RenderPresent(renderer);
 };
 

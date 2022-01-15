@@ -1,8 +1,9 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameObject.h"
-
-GameObject* ball;
+#include "Player.h"
+Player* ball;
+GameObject* block;
 Game::Game() {
 
 }
@@ -28,7 +29,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height) {
 		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 		isRunning = true;
 
-		ball = new GameObject("D:/GameDev/golf-sdl/Golf/Project1/Assets/1x/ball.png", renderer);
+		ball = new Player("Assets/1x/ball.png", renderer);
+		block = new GameObject("Assets/1x/block.png", renderer);
 	}
 };
 
@@ -47,11 +49,16 @@ void Game::handleEvents() {
 
 void Game::update() {
 	ball->Update();
+	//block->Update();
+	if (SDL_HasIntersection(&ball->getRect(), &block->getRect())) {
+		std::cout << "ball intersect with block" << std::endl;
+	}
 };
 
 void Game::render() {
 	SDL_RenderClear(renderer);
 	ball->Render();
+	block->Render();
 	SDL_RenderPresent(renderer);
 };
 

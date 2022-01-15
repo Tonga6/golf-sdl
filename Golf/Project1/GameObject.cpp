@@ -10,11 +10,3 @@
 //}
 //GameObject::GameObject() {};
 
-void GameObject::Update() {
-	xpos++;
-	ypos++;
-
-
-	dstRect.x = xpos;
-	dstRect.y = ypos;
-};
